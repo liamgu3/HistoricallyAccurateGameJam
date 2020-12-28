@@ -8,7 +8,8 @@ public class Player : MonoBehaviour
 	private Animator animator;
 	private int direction;
 
-	private float speed;	//speed that character moves at
+	private float speed;    //speed that character moves at
+	public bool movementPause;	//prevents movement during dialogue
 
     // Start is called before the first frame update
     void Start()
@@ -27,7 +28,10 @@ public class Player : MonoBehaviour
 
 	private void FixedUpdate()
 	{
-		Movement();
+		if (!movementPause)
+		{
+			Movement();
+		}
 	}
 
 	//moves player and assigns correct animation
