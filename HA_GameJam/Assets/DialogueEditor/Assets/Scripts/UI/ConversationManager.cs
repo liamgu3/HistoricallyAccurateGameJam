@@ -18,6 +18,7 @@ namespace DialogueEditor
         public static ConversationEndEvent OnConversationEnded;
 
 		private GameObject player;	//added - gets reference to player
+		private NPC currentlyPausedNPC;
 
         private enum eState
         {
@@ -341,7 +342,7 @@ namespace DialogueEditor
         // Start / End Conversation
         //--------------------------------------
 
-        public void StartConversation(NPCConversation conversation)
+        public void StartConversation(NPCConversation conversation, NPC npc)
         {
             m_conversation = conversation.Deserialize();
             if (OnConversationStarted != null)
@@ -352,7 +353,9 @@ namespace DialogueEditor
             m_pendingDialogue = m_conversation.Root;
             SetState(eState.TransitioningDialogueBoxOn);
 
-			player.GetComponent<Player>().movementPause = true;	//added
+			player.GetComponent<Player>().movementPause = true; //added
+			currentlyPausedNPC = npc;
+			currentlyPausedNPC.movementPaused = true;
         }
 
         public void EndConversation()
@@ -362,7 +365,8 @@ namespace DialogueEditor
             if (OnConversationEnded != null)
                 OnConversationEnded.Invoke();
 
-			player.GetComponent<Player>().movementPause = false;	//added
+			player.GetComponent<Player>().movementPause = false;    //added
+			currentlyPausedNPC.movementPaused = false;
 		}
 
 
