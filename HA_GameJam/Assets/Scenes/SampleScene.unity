@@ -151,7 +151,7 @@ Transform:
   m_Children:
   - {fileID: 241554958}
   m_Father: {fileID: 1028809219}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &92348565
 MonoBehaviour:
@@ -1348,6 +1348,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: NPC2
       objectReference: {fileID: 0}
+    - target: {fileID: 6689377822123466991, guid: 040a15912ada7a34482a0a83a371a96b,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 040a15912ada7a34482a0a83a371a96b, type: 3}
 --- !u!1 &2119225184
@@ -1670,5 +1675,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: NPC
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6604181523109751601, guid: 040a15912ada7a34482a0a83a371a96b, type: 3}
+    - {fileID: 6604181523109751600, guid: 040a15912ada7a34482a0a83a371a96b, type: 3}
+    - {fileID: 6604181523109751602, guid: 040a15912ada7a34482a0a83a371a96b, type: 3}
+    - {fileID: 6604181523109751603, guid: 040a15912ada7a34482a0a83a371a96b, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 040a15912ada7a34482a0a83a371a96b, type: 3}
