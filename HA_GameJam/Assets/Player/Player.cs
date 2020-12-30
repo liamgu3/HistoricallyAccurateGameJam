@@ -37,6 +37,9 @@ public class Player : MonoBehaviour
 	//moves player and assigns correct animation
 	private void Movement()
 	{
+		bool vertMovement = true;
+		bool horzMovement = true;
+
 		if (Input.GetKey(KeyCode.S))    //walking down
 		{
 			transform.position = new Vector2(transform.position.x, transform.position.y - speed);
@@ -47,18 +50,37 @@ public class Player : MonoBehaviour
 			transform.position = new Vector2(transform.position.x, transform.position.y + speed);
 			direction = 1;
 		}
+		else
+		{
+			vertMovement = false;
+		}
 
 		if (Input.GetKey(KeyCode.D))    //walking right
 		{
 			transform.position = new Vector2(transform.position.x + speed, transform.position.y);
 			direction = 2;
+			transform.localScale = new Vector3(-1, 1, 1);
 		}
 		else if (Input.GetKey(KeyCode.A))   //walking up
 		{
 			transform.position = new Vector2(transform.position.x - speed, transform.position.y);
 			direction = 3;
+			animator.SetBool("Mirror", false);
+			transform.localScale = new Vector3(1, 1, 1);
+		}
+		else 
+		{
+			horzMovement = false;
 		}
 
+		//if (Input.GetKeyUp(KeyCode.D))	//prevents brief animation flip when player stops moving right
+		//{
+		//	transform.localScale = new Vector3(1, 1, 1);
+		//}
+
+
+
 		animator.SetInteger("Direction", direction);
+		animator.SetBool("Moving", vertMovement || horzMovement);
 	}
 }
