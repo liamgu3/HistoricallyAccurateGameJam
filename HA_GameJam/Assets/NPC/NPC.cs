@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DialogueEditor;
+using UnityEngine.SceneManagement;
 
 public class NPC : MonoBehaviour
 {
@@ -24,29 +25,32 @@ public class NPC : MonoBehaviour
 		pathDirection = true;
 		speed = .01f;
 
-		if (gameObject.name == "Kurt")	
+		if (SceneManager.GetActiveScene().name == "MainScene")
 		{
-			if (!EventManager.hasMoney)	//Kurt will offer money if player didn't get it
+			if (gameObject.name == "Kurt")
 			{
-				myConversation = transform.Find("conversationNoMoney").GetComponent<DialogueEditor.NPCConversation>();
-			}
-		}
-		if (gameObject.name == "Markus")
-		{
-			if (EventManager.liedToMarkus)  //Markus will confront player if they lied to him earlier
-			{
-				if (EventManager.angeredMother)
+				if (!EventManager.hasMoney) //Kurt will offer money if player didn't get it
 				{
-					myConversation = transform.Find("conversationAngeredMother").GetComponent<DialogueEditor.NPCConversation>();
+					myConversation = transform.Find("conversationNoMoney").GetComponent<DialogueEditor.NPCConversation>();
+				}
+			}
+			if (gameObject.name == "Markus")
+			{
+				if (EventManager.liedToMarkus)  //Markus will confront player if they lied to him earlier
+				{
+					if (EventManager.angeredMother)
+					{
+						myConversation = transform.Find("conversationAngeredMother").GetComponent<DialogueEditor.NPCConversation>();
+					}
+					else
+					{
+						myConversation = transform.Find("conversationNormalMother").GetComponent<DialogueEditor.NPCConversation>();
+					}
 				}
 				else
 				{
-					myConversation = transform.Find("conversationNormalMother").GetComponent<DialogueEditor.NPCConversation>();
+					gameObject.SetActive(false);
 				}
-			}
-			else
-			{
-				gameObject.SetActive(false);
 			}
 		}
     }
