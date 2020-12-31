@@ -77,6 +77,9 @@ TextureImporter:
   - first:
       213: 5367762688600845265
     second: HA-Tiles-All_24
+  - first:
+      213: 3328357317804592646
+    second: HA-Tiles-All_25
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
