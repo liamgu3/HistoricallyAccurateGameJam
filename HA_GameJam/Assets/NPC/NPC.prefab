@@ -120,6 +120,7 @@ GameObject:
   - component: {fileID: 6604181523246643865}
   - component: {fileID: 6604181523246643864}
   - component: {fileID: 6604181523246643871}
+  - component: {fileID: 4367250986231598944}
   m_Layer: 8
   m_Name: NPC
   m_TagString: Untagged
@@ -160,7 +161,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -246,3 +247,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bfdd71f75ef41e4e9edfbd33582c7e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4367250986231598944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6604181523246643870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 0
+  m_CastsShadows: 1
+  m_SelfShadows: 0
+  m_ApplyToSortingLayers: 00000000d32f79ffb309773b
+  m_ShapePath:
+  - {x: -0.12671384, y: -0.53650856, z: 0}
+  - {x: 0.1354408, y: -0.5351627, z: 0}
+  - {x: 0.15713316, y: 0.1531595, z: 0}
+  - {x: 0.087117076, y: 0.54679036, z: 0}
+  - {x: -0.04688385, y: 0.5455893, z: 0}
+  - {x: -0.15628281, y: 0.15611589, z: 0}
+  m_ShapePathHash: -1050644621
+  m_Mesh: {fileID: 0}
+  m_InstanceId: -54072
