@@ -23,6 +23,32 @@ public class NPC : MonoBehaviour
 		currentTarget = 1;
 		pathDirection = true;
 		speed = .01f;
+
+		if (gameObject.name == "Kurt")	
+		{
+			if (!EventManager.hasMoney)	//Kurt will offer money if player didn't get it
+			{
+				myConversation = transform.Find("conversationNoMoney").GetComponent<DialogueEditor.NPCConversation>();
+			}
+		}
+		if (gameObject.name == "Markus")
+		{
+			if (EventManager.liedToMarkus)  //Markus will confront player if they lied to him earlier
+			{
+				if (EventManager.angeredMother)
+				{
+					myConversation = transform.Find("conversationAngeredMother").GetComponent<DialogueEditor.NPCConversation>();
+				}
+				else
+				{
+					myConversation = transform.Find("conversationNormalMother").GetComponent<DialogueEditor.NPCConversation>();
+				}
+			}
+			else
+			{
+				gameObject.SetActive(false);
+			}
+		}
     }
 
     // Update is called once per frame

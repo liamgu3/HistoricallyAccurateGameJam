@@ -354,6 +354,7 @@ namespace DialogueEditor
             SetState(eState.TransitioningDialogueBoxOn);
 
 			player.GetComponent<Player>().movementPause = true; //added
+			player.GetComponent<Player>().animator.SetBool("Moving", false);
 			currentlyPausedNPC = npc;
 			currentlyPausedNPC.movementPaused = true;
         }

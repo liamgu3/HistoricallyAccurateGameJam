@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 	//used for choosing which animation to use
-	private Animator animator;
+	public Animator animator;
 	private int direction;
 
 	private float speed;    //speed that character moves at
