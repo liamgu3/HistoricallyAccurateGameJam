@@ -69,13 +69,16 @@ public class EventManager : MonoBehaviour
 		set 
 		{
 			hasUniform = value;
-			if (EventManager.angeredMother)
+			if (liedToMarkus)
 			{
-				GameObject.Find("Markus").GetComponent<NPC>().myConversation = GameObject.Find("Markus").transform.Find("conversationAngeredMotherContraband").GetComponent<DialogueEditor.NPCConversation>();
-			}
-			else
-			{
-				GameObject.Find("Markus").GetComponent<NPC>().myConversation = GameObject.Find("Markus").transform.Find("conversationNormalMotherContraband").GetComponent<DialogueEditor.NPCConversation>();
+				if (EventManager.angeredMother)
+				{
+					GameObject.Find("Markus").GetComponent<NPC>().myConversation = GameObject.Find("Markus").transform.Find("conversationAngeredMotherContraband").GetComponent<DialogueEditor.NPCConversation>();
+				}
+				else
+				{
+					GameObject.Find("Markus").GetComponent<NPC>().myConversation = GameObject.Find("Markus").transform.Find("conversationNormalMotherContraband").GetComponent<DialogueEditor.NPCConversation>();
+				}
 			}
 		}
 	}

@@ -61,7 +61,7 @@ public class Player : MonoBehaviour
 			direction = 2;
 			transform.localScale = new Vector3(-1, 1, 1);
 		}
-		else if (Input.GetKey(KeyCode.A))   //walking up
+		else if (Input.GetKey(KeyCode.A))   //walking left
 		{
 			transform.position = new Vector2(transform.position.x - speed, transform.position.y);
 			direction = 3;
