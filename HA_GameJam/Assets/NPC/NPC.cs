@@ -31,7 +31,7 @@ public class NPC : MonoBehaviour
 			{
 				if (!EventManager.hasMoney) //Kurt will offer money if player didn't get it
 				{
-					myConversation = transform.Find("conversationNoMoney").GetComponent<DialogueEditor.NPCConversation>();
+					myConversation = transform.Find("conversationWithNoMoney").GetComponent<DialogueEditor.NPCConversation>();
 				}
 			}
 			if (gameObject.name == "Markus")
