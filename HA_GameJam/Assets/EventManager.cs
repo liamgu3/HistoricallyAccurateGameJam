@@ -8,6 +8,7 @@ public class EventManager : MonoBehaviour
 	public static bool hasMoney;
 	public static bool hasUniform;
 	public static bool hasGun;
+	public static bool hasCigarettes;
 
 	public static bool angeredMother;
 	public static bool liedToMarkus;
@@ -16,7 +17,7 @@ public class EventManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-		hasMoney = hasUniform = hasGun = angeredMother = liedToMarkus = gotDistraction = false;
+		hasMoney = hasUniform = hasGun = hasCigarettes = angeredMother = liedToMarkus = gotDistraction = false;
     }
 
     // Update is called once per frame
@@ -38,6 +39,7 @@ public class EventManager : MonoBehaviour
 		Debug.Log("Money: " + hasMoney);
 		Debug.Log("Uniform: " + hasUniform);
 		Debug.Log("Gun: " + hasGun);
+		Debug.Log("Cigarettes: " + hasCigarettes);
 		Debug.Log("AngeredMother: " + angeredMother);
 		Debug.Log("LiedToMarkus: " + liedToMarkus);
 		Debug.Log("GotDistraction: " + gotDistraction);
@@ -46,7 +48,19 @@ public class EventManager : MonoBehaviour
 	public bool HasMoney
 	{
 		get { return hasMoney; }
-		set { hasMoney = value; }
+		set 
+		{ 
+			hasMoney = value;
+
+			if (hasMoney)
+			{
+				GameObject.Find("StoreOwner").GetComponent<NPC>().myConversation = GameObject.Find("StoreOwner").transform.Find("conversationBuyCigs").GetComponent<DialogueEditor.NPCConversation>();
+			}
+			else
+			{
+				GameObject.Find("StoreOwner").GetComponent<NPC>().myConversation = GameObject.Find("StoreOwner").transform.Find("conversationNoBuyCigs").GetComponent<DialogueEditor.NPCConversation>();
+			}
+		}
 	}
 
 	public bool HasUniform
@@ -72,14 +86,20 @@ public class EventManager : MonoBehaviour
 		set 
 		{ 
 			hasGun = value;
-			if (EventManager.angeredMother)
+
+			if (liedToMarkus)
 			{
-				GameObject.Find("Markus").GetComponent<NPC>().myConversation = GameObject.Find("Markus").transform.Find("conversationAngeredMotherContraband").GetComponent<DialogueEditor.NPCConversation>();
+				if (EventManager.angeredMother)
+				{
+					GameObject.Find("Markus").GetComponent<NPC>().myConversation = GameObject.Find("Markus").transform.Find("conversationAngeredMotherContraband").GetComponent<DialogueEditor.NPCConversation>();
+				}
+				else
+				{
+					GameObject.Find("Markus").GetComponent<NPC>().myConversation = GameObject.Find("Markus").transform.Find("conversationNormalMotherContraband").GetComponent<DialogueEditor.NPCConversation>();
+				}
 			}
-			else
-			{
-				GameObject.Find("Markus").GetComponent<NPC>().myConversation = GameObject.Find("Markus").transform.Find("conversationNormalMotherContraband").GetComponent<DialogueEditor.NPCConversation>();
-			}
+
+			GameObject.Find("BorderGuard").GetComponent<NPC>().myConversation = GameObject.Find("BorderGuard").transform.Find("conversationNoCigs").GetComponent<DialogueEditor.NPCConversation>();
 		}
 	}
 	public bool AngeredMother
@@ -100,6 +120,37 @@ public class EventManager : MonoBehaviour
 		set { gotDistraction = value; }
 	}
 
+	public bool HasCigarettes
+	{
+		get { return hasCigarettes; }
+		set
+		{
+			hasCigarettes = value;
+			if (EventManager.hasGun)
+			{
+				if (EventManager.hasCigarettes)
+				{
+					GameObject.Find("BorderGuard").GetComponent<NPC>().myConversation = GameObject.Find("BorderGuard").transform.Find("conversationBoth").GetComponent<DialogueEditor.NPCConversation>();
+				}
+				else
+				{
+					GameObject.Find("BorderGuard").GetComponent<NPC>().myConversation = GameObject.Find("BorderGuard").transform.Find("conversationNoCigs").GetComponent<DialogueEditor.NPCConversation>();
+				}
+			}
+			else
+			{
+				if (EventManager.hasCigarettes)
+				{
+					GameObject.Find("BorderGuard").GetComponent<NPC>().myConversation = GameObject.Find("BorderGuard").transform.Find("conversationNoGun").GetComponent<DialogueEditor.NPCConversation>();
+				}
+				else
+				{
+					GameObject.Find("BorderGuard").GetComponent<NPC>().myConversation = GameObject.Find("BorderGuard").transform.Find("conversationNoGunNoCigs").GetComponent<DialogueEditor.NPCConversation>();
+				}
+			}
+		}
+	}
+
 	public void MarkusShot()
 	{ 
 		//needs to be filled in
@@ -111,6 +162,11 @@ public class EventManager : MonoBehaviour
 	}
 
 	public void AnjaRuns()
+	{ 
+		//needs to be filled in
+	}
+
+	public void GuardShot()
 	{ 
 		//needs to be filled in
 	}
