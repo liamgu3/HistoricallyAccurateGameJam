@@ -9,7 +9,9 @@ public class Player : MonoBehaviour
 	private int direction;
 
 	private float speed;    //speed that character moves at
-	public bool movementPause;	//prevents movement during dialogue
+	public bool movementPause;  //prevents movement during dialogue
+
+	private AudioSource footsteps;
 
     // Start is called before the first frame update
     void Start()
@@ -18,6 +20,8 @@ public class Player : MonoBehaviour
 		direction = 0;
 
 		speed = .05f;
+
+		footsteps = GetComponent<AudioSource>();
 	}
 
 	// Update is called once per frame
@@ -73,12 +77,13 @@ public class Player : MonoBehaviour
 			horzMovement = false;
 		}
 
-		//if (Input.GetKeyUp(KeyCode.D))	//prevents brief animation flip when player stops moving right
-		//{
-		//	transform.localScale = new Vector3(1, 1, 1);
-		//}
-
-
+		if (vertMovement || horzMovement)
+		{
+			if (!footsteps.isPlaying)
+			{
+				footsteps.Play();
+			}
+		}
 
 		animator.SetInteger("Direction", direction);
 		animator.SetBool("Moving", vertMovement || horzMovement);

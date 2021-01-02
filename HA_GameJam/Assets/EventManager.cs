@@ -196,7 +196,7 @@ public class EventManager : MonoBehaviour
 
 	public void MarkusShot()
 	{
-		//implement gunshot sound
+		GetComponent<AudioSource>().Play();
 		GameObject.Find("Markus").GetComponent<SpriteRenderer>().sprite = deadMarkus;
 	}
 
@@ -217,7 +217,7 @@ public class EventManager : MonoBehaviour
 
 	public void GuardShot()
 	{
-		//implement gunshot sound
+		GetComponent<AudioSource>().Play();
 		GameObject.Find("BorderGuard").GetComponent<SpriteRenderer>().sprite = deadGuard;
 	}
 

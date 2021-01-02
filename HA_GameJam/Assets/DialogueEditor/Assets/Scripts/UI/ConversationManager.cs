@@ -356,6 +356,7 @@ namespace DialogueEditor
 			player.GetComponent<Player>().movementPause = true; //added
 			player.GetComponent<Player>().animator.SetBool("Moving", false);
 			currentlyPausedNPC = npc;
+			currentlyPausedNPC.disableNewConversation = true;
 			currentlyPausedNPC.movementPaused = true;
         }
 
@@ -366,6 +367,7 @@ namespace DialogueEditor
             if (OnConversationEnded != null)
                 OnConversationEnded.Invoke();
 
+			currentlyPausedNPC.disableNewConversation = false;
 			player.GetComponent<Player>().movementPause = false;    //added
 			currentlyPausedNPC.movementPaused = false;
 		}

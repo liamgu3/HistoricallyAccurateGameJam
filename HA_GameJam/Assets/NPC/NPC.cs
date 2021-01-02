@@ -20,6 +20,9 @@ public class NPC : MonoBehaviour
 	private Animator animator;
 
 	public GameObject flashlight;
+	private AudioSource footsteps;
+
+	public bool disableNewConversation = false;
 
     // Start is called before the first frame update
     void Start()
@@ -30,8 +33,11 @@ public class NPC : MonoBehaviour
 		pathDirection = true;
 		speed = .0175f;
 
-		if(moving)	
+		if (moving)
+		{
 			animator = gameObject.GetComponent<Animator>();
+			footsteps = GetComponent<AudioSource>();
+		}
 
 		if (SceneManager.GetActiveScene().name == "MainScene")
 		{
@@ -66,7 +72,7 @@ public class NPC : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		if (inTrigger)
+		if (inTrigger && !disableNewConversation)
 		{
 			if (Input.GetKeyDown(KeyCode.E))
 			{
@@ -142,6 +148,14 @@ public class NPC : MonoBehaviour
 			flashlight.transform.eulerAngles = new Vector3(0f, 0f, 270f);
 		if (direction == 3)
 			flashlight.transform.eulerAngles = new Vector3(0f, 0f, 90f);
+
+		if (vertMovement || horzMovement)
+		{
+			if (!footsteps.isPlaying)
+			{
+				footsteps.Play();
+			}
+		}
 
 
 		animator.SetInteger("Direction", direction);
