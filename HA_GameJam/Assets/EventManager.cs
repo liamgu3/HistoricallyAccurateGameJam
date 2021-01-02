@@ -27,6 +27,9 @@ public class EventManager : MonoBehaviour
 	private float timer;
 	public Text timerObject;
 
+	public Sprite deadGuard;
+	public Sprite deadMarkus;
+
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -183,9 +186,18 @@ public class EventManager : MonoBehaviour
 		}
 	}
 
+	public void DistractionMade()
+	{
+		GameObject.Find("Guard1").SetActive(false);
+		GameObject.Find("Guard3").SetActive(false);
+		GameObject.Find("Guard5").SetActive(false);
+		GameObject.Find("Guard7").SetActive(false);
+	}
+
 	public void MarkusShot()
 	{
-		//needs to be filled in
+		//implement gunshot sound
+		GameObject.Find("Markus").GetComponent<SpriteRenderer>().sprite = deadMarkus;
 	}
 
 	public void AnjaArrested()
@@ -200,11 +212,13 @@ public class EventManager : MonoBehaviour
 	public void AnjaRuns()
 	{
 		startTimer = true;
+		timerObject.gameObject.SetActive(true);
 	}
 
 	public void GuardShot()
 	{
-		//needs to be filled in
+		//implement gunshot sound
+		GameObject.Find("BorderGuard").GetComponent<SpriteRenderer>().sprite = deadGuard;
 	}
 
 	public void OpenGate()
@@ -213,7 +227,7 @@ public class EventManager : MonoBehaviour
 		openGate.SetActive(true);
 	}
 
-	IEnumerator FadeToBlack(float time)
+	public IEnumerator FadeToBlack(float time)
 	{
 		float alpha = blackScreen.GetComponent<Image>().color.a;
 
@@ -225,7 +239,7 @@ public class EventManager : MonoBehaviour
 		}
 	}
 
-	IEnumerator FadeInText(GameObject text, float time)
+	public IEnumerator FadeInText(GameObject text, float time)
 	{
 		float alpha = text.GetComponent<Text>().color.a;
 
