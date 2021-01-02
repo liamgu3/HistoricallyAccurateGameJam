@@ -28,7 +28,7 @@ public class NPC : MonoBehaviour
 
 		currentTarget = 1;
 		pathDirection = true;
-		speed = .01f;
+		speed = .0175f;
 
 		if(moving)	
 			animator = gameObject.GetComponent<Animator>();

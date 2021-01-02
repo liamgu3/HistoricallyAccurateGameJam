@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using System;
 
 public class EventManager : MonoBehaviour
 {
@@ -14,20 +16,47 @@ public class EventManager : MonoBehaviour
 	public static bool liedToMarkus;
 	public static bool gotDistraction;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-		hasMoney = hasUniform = hasGun = hasCigarettes = angeredMother = liedToMarkus = gotDistraction = false;
-    }
+	//UI elements
+	public GameObject blackScreen;
+	public GameObject gameOverText;
+	public GameObject reasonText;
+	public GameObject closedGate;
+	public GameObject openGate;
 
-    // Update is called once per frame
-    void Update()
-    {
+	private bool startTimer;
+	private float timer;
+	public Text timerObject;
+
+	// Start is called before the first frame update
+	void Start()
+	{
+		hasMoney = hasUniform = hasGun = hasCigarettes = angeredMother = liedToMarkus = gotDistraction = false;
+		startTimer = false;
+		timer = 300.0f;
+	}
+
+	// Update is called once per frame
+	void Update()
+	{
 		if (Input.GetKeyDown(KeyCode.P))
 		{
 			PrintValues();
 		}
-    }
+
+		if (startTimer)
+		{
+			timer -= Time.deltaTime;
+			var ts = TimeSpan.FromSeconds(timer);
+			timerObject.text = string.Format("{0:00}:{1:00}", ts.Minutes, ts.Seconds);
+			if (timer <= 0.0f)
+			{
+				reasonText.GetComponent<Text>().text = "Anja was caught by the Stasi and arrested.";
+				StartCoroutine(FadeToBlack(2.0f));
+				StartCoroutine(FadeInText(gameOverText, 2.0f));
+				StartCoroutine(FadeInText(reasonText, 2.0f));
+			}
+		}
+	}
 
 	public static void LoadScene(string scene)
 	{
@@ -48,8 +77,8 @@ public class EventManager : MonoBehaviour
 	public bool HasMoney
 	{
 		get { return hasMoney; }
-		set 
-		{ 
+		set
+		{
 			hasMoney = value;
 
 			if (hasMoney)
@@ -66,7 +95,7 @@ public class EventManager : MonoBehaviour
 	public bool HasUniform
 	{
 		get { return hasUniform; }
-		set 
+		set
 		{
 			hasUniform = value;
 			if (liedToMarkus)
@@ -86,8 +115,8 @@ public class EventManager : MonoBehaviour
 	public bool HasGun
 	{
 		get { return hasGun; }
-		set 
-		{ 
+		set
+		{
 			hasGun = value;
 
 			if (liedToMarkus)
@@ -155,22 +184,56 @@ public class EventManager : MonoBehaviour
 	}
 
 	public void MarkusShot()
-	{ 
+	{
 		//needs to be filled in
 	}
 
 	public void AnjaArrested()
-	{ 
-		//needs to be filled in
+	{
+		reasonText.GetComponent<Text>().text = "Anja was arrested.";
+
+		StartCoroutine(FadeToBlack(2.0f));
+		StartCoroutine(FadeInText(gameOverText, 2.0f));
+		StartCoroutine(FadeInText(reasonText, 2.0f));
 	}
 
 	public void AnjaRuns()
-	{ 
-		//needs to be filled in
+	{
+		startTimer = true;
 	}
 
 	public void GuardShot()
-	{ 
+	{
 		//needs to be filled in
+	}
+
+	public void OpenGate()
+	{
+		closedGate.SetActive(false);
+		openGate.SetActive(true);
+	}
+
+	IEnumerator FadeToBlack(float time)
+	{
+		float alpha = blackScreen.GetComponent<Image>().color.a;
+
+		for (float t = 0.0f; t < 1.0f; t += Time.deltaTime / time)
+		{
+			Color newColor = new Color(0, 0, 0, Mathf.Lerp(alpha, 1.0f, t));
+			blackScreen.GetComponent<Image>().color = newColor;
+			yield return null;
+		}
+	}
+
+	IEnumerator FadeInText(GameObject text, float time)
+	{
+		float alpha = text.GetComponent<Text>().color.a;
+
+		for (float t = 0.0f; t< 1.0f; t += Time.deltaTime / time)
+		{
+			Color newColor = new Color(1, 1, 1, Mathf.Lerp(alpha, 1.0f, t));
+			text.GetComponent<Text>().color = newColor;
+			yield return null;
+		}
 	}
 }
