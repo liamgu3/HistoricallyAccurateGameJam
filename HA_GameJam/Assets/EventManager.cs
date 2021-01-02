@@ -11,6 +11,7 @@ public class EventManager : MonoBehaviour
 	public static bool hasUniform;
 	public static bool hasGun;
 	public static bool hasCigarettes;
+	public static bool hasTankKey;
 
 	public static bool angeredMother;
 	public static bool liedToMarkus;
@@ -30,10 +31,13 @@ public class EventManager : MonoBehaviour
 	public Sprite deadGuard;
 	public Sprite deadMarkus;
 
+	public GameObject tank;
+	public GameObject tankTarget;
+
 	// Start is called before the first frame update
 	void Start()
 	{
-		hasMoney = hasUniform = hasGun = hasCigarettes = angeredMother = liedToMarkus = gotDistraction = false;
+		hasMoney = hasUniform = hasGun = hasCigarettes = hasTankKey = angeredMother = liedToMarkus = gotDistraction = false;
 		startTimer = false;
 		timer = 300.0f;
 	}
@@ -155,6 +159,12 @@ public class EventManager : MonoBehaviour
 		set { gotDistraction = value; }
 	}
 
+	public bool HasTankKey
+	{
+		get { return hasTankKey; }
+		set { hasTankKey = value; }
+	}
+
 	public bool HasCigarettes
 	{
 		get { return hasCigarettes; }
@@ -227,6 +237,31 @@ public class EventManager : MonoBehaviour
 		openGate.SetActive(true);
 	}
 
+	public void MoveTank()
+	{
+		GameObject player = GameObject.Find("Player");
+		player.GetComponent<Player>().movementPause = true;
+		tank.GetComponent<startTank>().disableE = true;
+		player.transform.position = tank.transform.position;
+		player.transform.parent = tank.gameObject.transform;
+		player.layer = 9;
+		//while (Vector2.Distance(tankTarget.transform.position, tank.transform.position) > .5f)
+		//tank.transform.position = new Vector2(tank.transform.position.x + .2f, tank.transform.position.y + .25f);
+		StartCoroutine(MoveFromTo(tank.transform, tank.transform.position, tankTarget.transform.position, 3.0f));
+		//player.transform.parent = null;
+		//player.GetComponent<Player>().movementPause = false;
+		Invoke("UnParentPlayer", 10f);
+	}
+
+	private void UnParentPlayer()
+	{
+		GameObject player = GameObject.Find("Player");
+		player.transform.parent = null;
+		player.GetComponent<Player>().movementPause = false;
+		player.layer = 0;
+		
+	}
+
 	public IEnumerator FadeToBlack(float time)
 	{
 		float alpha = blackScreen.GetComponent<Image>().color.a;
@@ -249,5 +284,18 @@ public class EventManager : MonoBehaviour
 			text.GetComponent<Text>().color = newColor;
 			yield return null;
 		}
+	}
+
+	IEnumerator MoveFromTo(Transform objectToMove, Vector3 a, Vector3 b, float speed)
+	{
+		float step = (speed / (a - b).magnitude) * Time.fixedDeltaTime;
+		float t = 0;
+		while (t <= 1.0f)
+		{
+			t += step; // Goes from 0 to 1, incrementing by step each time
+			objectToMove.position = Vector3.Lerp(a, b, t); // Move objectToMove closer to b
+			yield return new WaitForFixedUpdate();         // Leave the routine and return here in the next frame
+		}
+		objectToMove.position = b;
 	}
 }
