@@ -10,7 +10,7 @@ public class ResetStatics : MonoBehaviour
 
 		EventManager.hasMoney = EventManager.hasUniform = EventManager.hasGun = EventManager.hasCigarettes = EventManager.hasTankKey = EventManager.liedToMarkus = EventManager.gotDistraction = Player.uniform = false;
 		SceneEntrance.mainScenePosition = Vector2.zero;
-		Player.twoLoad = 1;
+		Player.twoLoad = 0;
 	}
 
 	// Start is called before the first frame update

@@ -19,7 +19,7 @@ public class MenuButtons : MonoBehaviour
     {
 		videoStarted = false;
 		video = GetComponent<VideoPlayer>();
-
+		video.url = System.IO.Path.Combine(Application.streamingAssetsPath, "HA-Outro.mp4");
 	}
 
     // Update is called once per frame

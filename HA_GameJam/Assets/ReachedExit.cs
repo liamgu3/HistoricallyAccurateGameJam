@@ -9,12 +9,14 @@ public class ReachedExit : MonoBehaviour
 	public GameObject blackScreen;
 	public GameObject restart;
 	public GameObject exit;
+	private VideoPlayer video;
 	
     // Start is called before the first frame update
     void Start()
     {
-        
-    }
+        video = GetComponent<VideoPlayer>();
+		video.url = System.IO.Path.Combine(Application.streamingAssetsPath, "HA-Outro.mp4");
+	}
 
     // Update is called once per frame
     void Update()
@@ -29,7 +31,7 @@ public class ReachedExit : MonoBehaviour
 			camera1.GetComponents<AudioSource>()[0].Stop();
 			camera1.GetComponents<AudioSource>()[1].Stop();
 			GameObject.Find("Player").GetComponent<Player>().movementPause = true;
-			GetComponent<VideoPlayer>().Play();
+			video.Play();
 			ChangeUI();
 		}
 	}
