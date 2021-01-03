@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Video;
 
 public class MenuButtons : MonoBehaviour
 {
@@ -19,7 +20,8 @@ public class MenuButtons : MonoBehaviour
 
 	public void StartGame()
 	{
-		SceneManager.LoadScene(1);
+		GetComponent<VideoPlayer>().Play();
+		//SceneManager.LoadScene(1);
 	}
 
 	public void ExitGame()

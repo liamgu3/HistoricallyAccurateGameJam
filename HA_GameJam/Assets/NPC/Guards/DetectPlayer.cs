@@ -9,7 +9,10 @@ public class DetectPlayer : MonoBehaviour
 	private EventManager eventManager;
 
 	private bool deathStrip;    //true if death strip guard
-	private bool uniform;		//true if player is wearing uniform
+	private bool uniform;       //true if player is wearing uniform
+
+	public GameObject restartButton;
+	public GameObject exitButton;
 
     // Start is called before the first frame update
     void Start()
@@ -29,7 +32,7 @@ public class DetectPlayer : MonoBehaviour
 	{
 		if (collision.tag == "Player")
 		{
-			if (deathStrip || !uniform)		//should detect in death strip regardless, or if player is not in uniform
+			if (deathStrip || !Player.uniform)		//should detect in death strip regardless, or if player is not in uniform
 			{
 				timer += Time.deltaTime;
 				if (timer >= 2.5f)
@@ -38,6 +41,8 @@ public class DetectPlayer : MonoBehaviour
 					StartCoroutine(eventManager.FadeToBlack(2.0f));
 					StartCoroutine(eventManager.FadeInText(eventManager.gameOverText, 2.0f));
 					StartCoroutine(eventManager.FadeInText(eventManager.reasonText, 2.0f));
+					eventManager.restartButton.SetActive(true);
+					eventManager.exitButton.SetActive(true);
 				}
 			}
 		}

@@ -35,6 +35,14 @@ public class EventManager : MonoBehaviour
 	public GameObject tankTarget;
 
 	public GameObject uniformButton;
+	public GameObject restartButton;
+	public GameObject exitButton;
+
+	public GameObject cigUI;
+	public GameObject gunUI;
+	public GameObject keyUI;
+	public GameObject moneyUI;
+	public GameObject uniformUI;
 
 	// Start is called before the first frame update
 	void Start()
@@ -42,6 +50,7 @@ public class EventManager : MonoBehaviour
 		//hasMoney = hasUniform = hasGun = hasCigarettes = hasTankKey = angeredMother = liedToMarkus = gotDistraction = false;
 		startTimer = false;
 		timer = 300.0f;
+		CorrectUI();
 	}
 
 	// Update is called once per frame
@@ -89,6 +98,7 @@ public class EventManager : MonoBehaviour
 		set
 		{
 			hasMoney = value;
+			moneyUI.SetActive(hasMoney);
 
 			if (SceneManager.GetActiveScene().name == "MainScene")
 			{
@@ -111,6 +121,7 @@ public class EventManager : MonoBehaviour
 		{
 			hasUniform = value;
 			uniformButton.SetActive(true);
+			uniformUI.SetActive(hasUniform);
 			if (liedToMarkus)
 			{
 				if (EventManager.angeredMother)
@@ -131,6 +142,7 @@ public class EventManager : MonoBehaviour
 		set
 		{
 			hasGun = value;
+			gunUI.SetActive(HasGun);
 
 			if (liedToMarkus)
 			{
@@ -168,7 +180,11 @@ public class EventManager : MonoBehaviour
 	public bool HasTankKey
 	{
 		get { return hasTankKey; }
-		set { hasTankKey = value; }
+		set 
+		{ 
+			hasTankKey = value;
+			keyUI.SetActive(hasTankKey);
+		}
 	}
 
 	public bool HasCigarettes
@@ -177,6 +193,7 @@ public class EventManager : MonoBehaviour
 		set
 		{
 			hasCigarettes = value;
+			cigUI.SetActive(HasCigarettes);
 			if (EventManager.hasGun)
 			{
 				if (EventManager.hasCigarettes)
@@ -223,6 +240,8 @@ public class EventManager : MonoBehaviour
 		StartCoroutine(FadeToBlack(2.0f));
 		StartCoroutine(FadeInText(gameOverText, 2.0f));
 		StartCoroutine(FadeInText(reasonText, 2.0f));
+		restartButton.SetActive(true);
+		exitButton.SetActive(true);
 	}
 
 	public void AnjaRuns()
@@ -299,5 +318,14 @@ public class EventManager : MonoBehaviour
 			yield return new WaitForFixedUpdate();         // Leave the routine and return here in the next frame
 		}
 		objectToMove.position = b;
+	}
+
+	private void CorrectUI()
+	{
+		cigUI.SetActive(hasCigarettes);
+		gunUI.SetActive(hasGun);
+		keyUI.SetActive(hasTankKey);
+		moneyUI.SetActive(hasMoney);
+		uniformUI.SetActive(HasUniform);
 	}
 }

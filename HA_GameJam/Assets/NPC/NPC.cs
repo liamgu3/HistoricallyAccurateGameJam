@@ -115,7 +115,7 @@ public class NPC : MonoBehaviour
 				disableNewConversation = true;
 				forceConversation = false;
 			}
-			else if (collision.tag == "Player" && !disableNewConversation)
+			else if (collision.tag == "Player" && !disableNewConversation && !moving)
 			{
 				inTrigger = true;
 				interactIcon.SetActive(true);

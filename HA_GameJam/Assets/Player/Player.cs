@@ -13,9 +13,12 @@ public class Player : MonoBehaviour
 	public bool movementPause;  //prevents movement during dialogue
 
 	private AudioSource footsteps;
-	public static bool uniform;
+	public static bool uniform;		//true when uniform is on
 
-	private static int twoLoad = 0;
+	public static int twoLoad = 0;
+
+	public GameObject RestartButton;
+	public GameObject ExitButton;
 
 
 	// Start is called before the first frame update
@@ -37,12 +40,20 @@ public class Player : MonoBehaviour
 
 		footsteps = GetComponent<AudioSource>();
 		animator.SetBool("Uniform", uniform);
+
+		if (EventManager.hasUniform)
+			GameObject.Find("UniformButton").SetActive(true);
 	}
 
 	// Update is called once per frame
 	void Update()
     {
-		
+		if (Input.GetKeyDown(KeyCode.Escape))
+		{
+			movementPause = !movementPause;
+			RestartButton.SetActive(!RestartButton.activeSelf);
+			ExitButton.SetActive(!ExitButton.activeSelf);
+		}
 	}
 
 	private void FixedUpdate()
@@ -108,5 +119,16 @@ public class Player : MonoBehaviour
 	{
 		uniform = !uniform;
 		animator.SetBool("Uniform", uniform);
+	}
+
+	//buttons
+	public void RestartGame()
+	{
+		SceneManager.LoadScene(1);
+	}
+
+	public void ExitGame()
+	{
+		Application.Quit();
 	}
 }
