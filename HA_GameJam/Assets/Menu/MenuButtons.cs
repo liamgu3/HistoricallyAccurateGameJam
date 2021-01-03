@@ -14,12 +14,15 @@ public class MenuButtons : MonoBehaviour
 	public GameObject exit;
 	public GameObject skip;
 
+	public GameObject videoObject;
+
     // Start is called before the first frame update
     void Start()
     {
 		videoStarted = false;
 		video = GetComponent<VideoPlayer>();
-		video.url = System.IO.Path.Combine(Application.streamingAssetsPath, "HA-Outro.mp4");
+		video.url = System.IO.Path.Combine(Application.streamingAssetsPath, "HA-Intro.mp4");
+		//video.Prepare();
 	}
 
     // Update is called once per frame
@@ -27,19 +30,19 @@ public class MenuButtons : MonoBehaviour
     {
 		if (videoStarted)
 		{
-			if (!video.isPlaying)
+			if (!videoObject.GetComponent<VideoPlayer>().isPlaying)
 			{
 				SceneManager.LoadScene(1);
 			}
 		}
 
-    }
+	}
 
 	public void StartGame()
 	{
 		//GameObject.Find("Canvas").SetActive(false);
 		GetComponent<AudioSource>().Stop();
-		video.Play();
+		videoObject.SetActive(true);
 		videoStarted = true;
 		ChangeUI();
 	}
@@ -59,6 +62,6 @@ public class MenuButtons : MonoBehaviour
 
 	public void Skip()
 	{
-		video.Stop();
+		videoObject.GetComponent<VideoPlayer>().Stop();
 	}
 }
