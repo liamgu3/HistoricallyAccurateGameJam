@@ -289,7 +289,7 @@ public class EventManager : MonoBehaviour
 
 		for (float t = 0.0f; t < 1.0f; t += Time.deltaTime / time)
 		{
-			Color newColor = new Color(0, 0, 0, Mathf.Lerp(alpha, 1.0f, t));
+			Color newColor = new Color(1, 1, 1, Mathf.Lerp(alpha, 1.0f, t));
 			blackScreen.GetComponent<Image>().color = newColor;
 			yield return null;
 		}

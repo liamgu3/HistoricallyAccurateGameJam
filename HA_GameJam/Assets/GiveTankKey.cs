@@ -55,7 +55,7 @@ public class GiveTankKey : MonoBehaviour
 
 		for (float t = 0.0f; t < 1.0f; t += Time.deltaTime / time)
 		{
-			Color newColor = new Color(0, 0, 0, Mathf.Lerp(alpha, 1.0f, t));
+			Color newColor = new Color(0.4244997f, 0.2710039f, 0.5471698f, Mathf.Lerp(alpha, 1.0f, t));
 			text.GetComponent<Text>().color = newColor;
 			yield return null;
 		}
