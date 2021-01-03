@@ -8,11 +8,14 @@ public class DetectPlayer : MonoBehaviour
 	private float timer;
 	private EventManager eventManager;
 
+	private bool deathStrip;	//true if death strip guard
+
     // Start is called before the first frame update
     void Start()
     {
 		timer = 0.0f;
 		eventManager = GameObject.Find("EventManager").GetComponent<EventManager>();
+		deathStrip = transform.parent.GetComponent<NPC>().deathStrip;
     }
 
     // Update is called once per frame
@@ -23,7 +26,7 @@ public class DetectPlayer : MonoBehaviour
 
 	private void OnTriggerStay2D(Collider2D collision)
 	{
-		if (collision.tag == "Player")
+		if (collision.tag == "Player" && !deathStrip)
 		{
 			timer += Time.deltaTime;
 			if (timer >= 2.5f)

@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
 	public bool movementPause;  //prevents movement during dialogue
 
 	private AudioSource footsteps;
+	private bool uniform;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +23,7 @@ public class Player : MonoBehaviour
 		speed = .05f;
 
 		footsteps = GetComponent<AudioSource>();
+		uniform = false;
 	}
 
 	// Update is called once per frame
@@ -87,5 +89,11 @@ public class Player : MonoBehaviour
 
 		animator.SetInteger("Direction", direction);
 		animator.SetBool("Moving", vertMovement || horzMovement);
+	}
+
+	public void ChangeUniform()
+	{
+		uniform = !uniform;
+		animator.SetBool("Uniform", uniform);
 	}
 }

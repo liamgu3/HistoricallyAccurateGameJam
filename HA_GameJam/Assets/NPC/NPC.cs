@@ -21,6 +21,7 @@ public class NPC : MonoBehaviour
 
 	public GameObject flashlight;
 	private AudioSource footsteps;
+	public bool deathStrip; //true if a deathstrip guard
 
 	public bool disableNewConversation = false;
 
