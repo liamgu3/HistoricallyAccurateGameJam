@@ -28,6 +28,11 @@ public class MenuButtons : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+		if (videoObject.GetComponent<VideoPlayer>().isPlaying && !videoStarted)
+		{
+			videoStarted = true;
+		}
+
 		if (videoStarted)
 		{
 			if (!videoObject.GetComponent<VideoPlayer>().isPlaying)
@@ -43,7 +48,6 @@ public class MenuButtons : MonoBehaviour
 		//GameObject.Find("Canvas").SetActive(false);
 		GetComponent<AudioSource>().Stop();
 		videoObject.SetActive(true);
-		videoStarted = true;
 		ChangeUI();
 	}
 
