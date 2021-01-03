@@ -366,6 +366,7 @@ GameObject:
   - component: {fileID: 8181172693590084711}
   - component: {fileID: 7744505647812277275}
   - component: {fileID: 7894185772208483188}
+  - component: {fileID: 4723471910072672042}
   m_Layer: 8
   m_Name: flashlight
   m_TagString: Untagged
@@ -454,6 +455,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.25, y: 3}
   m_EdgeRadius: 0
+--- !u!114 &4723471910072672042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6450476647628049229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0095fdfc93e4fc4da371378bc230036, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3888040645748026088
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -464,7 +477,7 @@ PrefabInstance:
     - target: {fileID: 4367250986231598944, guid: 040a15912ada7a34482a0a83a371a96b,
         type: 3}
       propertyPath: m_InstanceId
-      value: -25020
+      value: -49680
       objectReference: {fileID: 0}
     - target: {fileID: 5462830626531889456, guid: 040a15912ada7a34482a0a83a371a96b,
         type: 3}
@@ -590,7 +603,7 @@ PrefabInstance:
     - target: {fileID: 6689377822123466991, guid: 040a15912ada7a34482a0a83a371a96b,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 040a15912ada7a34482a0a83a371a96b, type: 3}

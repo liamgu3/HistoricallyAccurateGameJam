@@ -15,6 +15,7 @@ public class SceneEntrance : MonoBehaviour
     void Start()
     {
 		player = GameObject.Find("Player");
+		interactIcon.SetActive(false);
     }
 
     // Update is called once per frame

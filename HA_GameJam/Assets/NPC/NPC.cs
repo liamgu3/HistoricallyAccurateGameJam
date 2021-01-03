@@ -26,6 +26,8 @@ public class NPC : MonoBehaviour
 	public bool disableNewConversation = false;
 	public GameObject interactIcon;
 
+	public bool forceConversation;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,6 +36,8 @@ public class NPC : MonoBehaviour
 		currentTarget = 1;
 		pathDirection = true;
 		speed = .0175f;
+
+		interactIcon.SetActive(false);
 
 		if (moving)
 		{
@@ -68,6 +72,17 @@ public class NPC : MonoBehaviour
 					gameObject.SetActive(false);
 				}
 			}
+			if (gameObject.name == "StoreOwner")
+			{
+				if (EventManager.hasMoney)
+				{
+					GameObject.Find("StoreOwner").GetComponent<NPC>().myConversation = GameObject.Find("StoreOwner").transform.Find("conversationBuyCigs").GetComponent<DialogueEditor.NPCConversation>();
+				}
+				else
+				{
+					GameObject.Find("StoreOwner").GetComponent<NPC>().myConversation = GameObject.Find("StoreOwner").transform.Find("conversationNoBuyCigs").GetComponent<DialogueEditor.NPCConversation>();
+				}
+			}
 		}
     }
 
@@ -78,7 +93,7 @@ public class NPC : MonoBehaviour
 		{
 			if (Input.GetKeyDown(KeyCode.E))
 			{
-				ConversationManager.Instance.StartConversation(myConversation, this);
+				ConversationManager.Instance.StartConversation(myConversation, this, forceConversation);
 			}
 		}
 
@@ -88,12 +103,23 @@ public class NPC : MonoBehaviour
 		}
 	}
 
+	
+
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		if (collision.tag == "Player")
+		if(collision.tag == "Player")
 		{
-			inTrigger = true;
-			interactIcon.SetActive(true);
+			if (forceConversation)
+			{
+				ConversationManager.Instance.StartConversation(myConversation, this, forceConversation);
+				disableNewConversation = true;
+				forceConversation = false;
+			}
+			else if (collision.tag == "Player" && !disableNewConversation)
+			{
+				inTrigger = true;
+				interactIcon.SetActive(true);
+			}
 		}
 	}
 

@@ -15,18 +15,19 @@ public class Player : MonoBehaviour
 	private AudioSource footsteps;
 	public static bool uniform;
 
-	private static bool firstLoad = true;
+	private static int twoLoad = 0;
+
 
 	// Start is called before the first frame update
 	void Start()
     {
-		if (!firstLoad && SceneManager.GetActiveScene().name == "MainScene")
+		if (twoLoad >= 2 && SceneManager.GetActiveScene().name == "MainScene")
 		{
 			transform.position = SceneEntrance.mainScenePosition;
 		}
 		else
 		{
-			firstLoad = false;
+			twoLoad++;
 		}
 
 		animator = GetComponent<Animator>();

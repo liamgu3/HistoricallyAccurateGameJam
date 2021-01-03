@@ -47,7 +47,7 @@ public class DetectPlayer : MonoBehaviour
 	{
 		if (collision.tag == "Player")
 		{
-			timer = 0.0f;
+			//timer = 0.0f;
 		}
 	}
 }

@@ -12,6 +12,7 @@ public class startTank : MonoBehaviour
     void Start()
     {
 		inTrigger = disableE = false;
+		interactIcon.SetActive(false);
     }
 
     // Update is called once per frame
@@ -22,6 +23,7 @@ public class startTank : MonoBehaviour
 			if (Input.GetKeyDown(KeyCode.E))
 			{
 				GameObject.Find("EventManager").GetComponent<EventManager>().MoveTank();
+				GetComponent<AudioSource>().Play();
 			}
 		}
 	}

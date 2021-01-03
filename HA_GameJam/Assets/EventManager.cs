@@ -25,7 +25,7 @@ public class EventManager : MonoBehaviour
 	public GameObject openGate;
 
 	private bool startTimer;
-	private float timer;
+	private static float timer;
 	public Text timerObject;
 
 	public Sprite deadGuard;
@@ -33,6 +33,8 @@ public class EventManager : MonoBehaviour
 
 	public GameObject tank;
 	public GameObject tankTarget;
+
+	public GameObject uniformButton;
 
 	// Start is called before the first frame update
 	void Start()
@@ -88,13 +90,16 @@ public class EventManager : MonoBehaviour
 		{
 			hasMoney = value;
 
-			if (hasMoney)
+			if (SceneManager.GetActiveScene().name == "MainScene")
 			{
-				GameObject.Find("StoreOwner").GetComponent<NPC>().myConversation = GameObject.Find("StoreOwner").transform.Find("conversationBuyCigs").GetComponent<DialogueEditor.NPCConversation>();
-			}
-			else
-			{
-				GameObject.Find("StoreOwner").GetComponent<NPC>().myConversation = GameObject.Find("StoreOwner").transform.Find("conversationNoBuyCigs").GetComponent<DialogueEditor.NPCConversation>();
+				if (hasMoney)
+				{
+					GameObject.Find("StoreOwner").GetComponent<NPC>().myConversation = GameObject.Find("StoreOwner").transform.Find("conversationBuyCigs").GetComponent<DialogueEditor.NPCConversation>();
+				}
+				else
+				{
+					GameObject.Find("StoreOwner").GetComponent<NPC>().myConversation = GameObject.Find("StoreOwner").transform.Find("conversationNoBuyCigs").GetComponent<DialogueEditor.NPCConversation>();
+				}
 			}
 		}
 	}
@@ -105,6 +110,7 @@ public class EventManager : MonoBehaviour
 		set
 		{
 			hasUniform = value;
+			uniformButton.SetActive(true);
 			if (liedToMarkus)
 			{
 				if (EventManager.angeredMother)
@@ -245,21 +251,17 @@ public class EventManager : MonoBehaviour
 		player.transform.position = tank.transform.position;
 		player.transform.parent = tank.gameObject.transform;
 		player.layer = 9;
-		//while (Vector2.Distance(tankTarget.transform.position, tank.transform.position) > .5f)
-		//tank.transform.position = new Vector2(tank.transform.position.x + .2f, tank.transform.position.y + .25f);
 		StartCoroutine(MoveFromTo(tank.transform, tank.transform.position, tankTarget.transform.position, 3.0f));
-		//player.transform.parent = null;
-		//player.GetComponent<Player>().movementPause = false;
 		Invoke("UnParentPlayer", 10f);
 	}
 
 	private void UnParentPlayer()
 	{
+		GameObject.Find("Tank").GetComponent<AudioSource>().Stop();
 		GameObject player = GameObject.Find("Player");
 		player.transform.parent = null;
 		player.GetComponent<Player>().movementPause = false;
 		player.layer = 0;
-		
 	}
 
 	public IEnumerator FadeToBlack(float time)

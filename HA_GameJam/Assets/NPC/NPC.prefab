@@ -214,6 +214,7 @@ MonoBehaviour:
   deathStrip: 0
   disableNewConversation: 0
   interactIcon: {fileID: 8670500782763866116}
+  forceConversation: 0
 --- !u!61 &6604181523246643864
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -279,7 +280,7 @@ MonoBehaviour:
   - {x: -0.15628281, y: 0.15611589, z: 0}
   m_ShapePathHash: -1050644621
   m_Mesh: {fileID: 0}
-  m_InstanceId: 226422
+  m_InstanceId: 52646
 --- !u!1 &8670500782763866116
 GameObject:
   m_ObjectHideFlags: 0
@@ -296,7 +297,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &9043883701809191269
 Transform:
   m_ObjectHideFlags: 0
@@ -347,9 +348,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 997657011
+  m_SortingLayer: 2
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 090be1ef32a7e8b47bbdc9945bd0e91b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
