@@ -8,7 +8,8 @@ public class DetectPlayer : MonoBehaviour
 	private float timer;
 	private EventManager eventManager;
 
-	private bool deathStrip;	//true if death strip guard
+	private bool deathStrip;    //true if death strip guard
+	private bool uniform;		//true if player is wearing uniform
 
     // Start is called before the first frame update
     void Start()
@@ -26,15 +27,18 @@ public class DetectPlayer : MonoBehaviour
 
 	private void OnTriggerStay2D(Collider2D collision)
 	{
-		if (collision.tag == "Player" && !deathStrip)
+		if (collision.tag == "Player")
 		{
-			timer += Time.deltaTime;
-			if (timer >= 2.5f)
+			if (deathStrip || !uniform)		//should detect in death strip regardless, or if player is not in uniform
 			{
-				eventManager.reasonText.GetComponent<Text>().text = "Anja was caught by the border guards and arrested.";
-				StartCoroutine(eventManager.FadeToBlack(2.0f));
-				StartCoroutine(eventManager.FadeInText(eventManager.gameOverText, 2.0f));
-				StartCoroutine(eventManager.FadeInText(eventManager.reasonText, 2.0f));
+				timer += Time.deltaTime;
+				if (timer >= 2.5f)
+				{
+					eventManager.reasonText.GetComponent<Text>().text = "Anja was caught by the border guards and arrested.";
+					StartCoroutine(eventManager.FadeToBlack(2.0f));
+					StartCoroutine(eventManager.FadeInText(eventManager.gameOverText, 2.0f));
+					StartCoroutine(eventManager.FadeInText(eventManager.reasonText, 2.0f));
+				}
 			}
 		}
 	}

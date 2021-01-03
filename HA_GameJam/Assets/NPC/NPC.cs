@@ -24,6 +24,7 @@ public class NPC : MonoBehaviour
 	public bool deathStrip; //true if a deathstrip guard
 
 	public bool disableNewConversation = false;
+	public GameObject interactIcon;
 
     // Start is called before the first frame update
     void Start()
@@ -92,6 +93,7 @@ public class NPC : MonoBehaviour
 		if (collision.tag == "Player")
 		{
 			inTrigger = true;
+			interactIcon.SetActive(true);
 		}
 	}
 
@@ -100,6 +102,7 @@ public class NPC : MonoBehaviour
 		if (collision.tag == "Player")
 		{
 			inTrigger = false;
+			interactIcon.SetActive(false);
 		}
 	}
 

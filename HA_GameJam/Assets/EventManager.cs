@@ -37,7 +37,7 @@ public class EventManager : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
 	{
-		hasMoney = hasUniform = hasGun = hasCigarettes = hasTankKey = angeredMother = liedToMarkus = gotDistraction = false;
+		//hasMoney = hasUniform = hasGun = hasCigarettes = hasTankKey = angeredMother = liedToMarkus = gotDistraction = false;
 		startTimer = false;
 		timer = 300.0f;
 	}

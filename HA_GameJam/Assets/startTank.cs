@@ -6,6 +6,7 @@ public class startTank : MonoBehaviour
 {
 	private bool inTrigger;
 	public bool disableE;
+	public GameObject interactIcon;
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +31,8 @@ public class startTank : MonoBehaviour
 		if (collision.tag == "Player")
 		{
 			inTrigger = true;
+			if(EventManager.hasTankKey)
+				interactIcon.SetActive(true);
 		}
 	}
 
@@ -38,6 +41,8 @@ public class startTank : MonoBehaviour
 		if (collision.tag == "Player")
 		{
 			inTrigger = false;
+			if(EventManager.hasTankKey)
+				interactIcon.SetActive(false);
 		}
 	}
 }

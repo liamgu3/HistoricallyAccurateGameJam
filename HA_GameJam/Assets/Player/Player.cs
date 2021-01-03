@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -12,18 +13,29 @@ public class Player : MonoBehaviour
 	public bool movementPause;  //prevents movement during dialogue
 
 	private AudioSource footsteps;
-	private bool uniform;
+	public static bool uniform;
 
-    // Start is called before the first frame update
-    void Start()
+	private static bool firstLoad = true;
+
+	// Start is called before the first frame update
+	void Start()
     {
+		if (!firstLoad && SceneManager.GetActiveScene().name == "MainScene")
+		{
+			transform.position = SceneEntrance.mainScenePosition;
+		}
+		else
+		{
+			firstLoad = false;
+		}
+
 		animator = GetComponent<Animator>();
 		direction = 0;
 
 		speed = .05f;
 
 		footsteps = GetComponent<AudioSource>();
-		uniform = false;
+		animator.SetBool("Uniform", uniform);
 	}
 
 	// Update is called once per frame
